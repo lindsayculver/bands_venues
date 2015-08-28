@@ -57,7 +57,7 @@ get('/venue/:id') do
   erb(:venue_detail)
 end
 
-post('/venue/:id/') do
+post('/venue/:id') do
   band_name = params.fetch("name")
   venue_id = params.fetch("id").to_i()
   venue = Venue.find(venue_id)
@@ -69,4 +69,10 @@ post('/venue/:id/') do
     band.venues.push(band_name)
   end
   redirect("/")
+end
+
+get('/band/:id') do
+  @band = Band.find(params.fetch("id").to_i())
+  @venues = Venue.all()
+  erb(:index)
 end
