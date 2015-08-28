@@ -46,8 +46,7 @@ delete('/bands/:id/delete') do
   redirect("/")
 end
 
-get('/venue/:id') do
+get('/bands/venue/:id') do
   @venue = Venue.find(params.fetch("id").to_i())
-  @bands = Bands.all()
-  erb(:recipe_detail)
+  erb(:venue_detail)
 end

@@ -3,7 +3,7 @@
 <br>
 <ul>
   <% @band.venues.each() do |venue| %>
-  <li> <a href="/bands/<%= venue.id() %>"><%= venue.name() %></a></li>
+  <li> <a href="/bands/venue/<%= venue.id() %>"><%= venue.name() %></a></li>
   <% end %>
 </ul>
 
