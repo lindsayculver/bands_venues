@@ -16,3 +16,17 @@ post('/bands') do
   @bands = Band.all()
   erb(:index)
 end
+
+get('/bands/:id') do
+  @band = Band.find(params.fetch("id").to_i())
+  erb(:band_detail)
+end
+
+post('/bands/:id/new') do
+  name = params.fetch("name")
+  band_id = params.fetch("id").to_i()
+  band = Band.find(band_id)
+  new_venue = Venue.create({:name => name})
+  band.venues.push(new_venue)
+  redirect back
+end

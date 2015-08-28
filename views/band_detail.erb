@@ -1,0 +1,18 @@
+<h1><%= @band.name %>'s Venues</h1>
+
+<br>
+<ul>
+  <% @band.venues.each() do |venue| %>
+  <li> <a href="/bands/<%= venue.id() %>"><%= venue.name() %></a></li>
+  <% end %>
+</ul>
+
+<br>
+<form action="/bands/<%= @band.id() %>/new" method="post">
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-success btn-xs">add a venue</button>
+</form>
+
+<br>
+<a href="/" class="btn btn-success btn-xs">Back to Bands</a>
