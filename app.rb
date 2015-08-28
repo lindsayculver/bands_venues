@@ -30,3 +30,11 @@ post('/bands/:id/new') do
   band.venues.push(new_venue)
   redirect back
 end
+
+patch('/bands/:id') do
+  new_name = params.fetch("name")
+  id = params.fetch("id").to_i()
+  @band = Band.find(id)
+  @band.update({:name => new_name})
+  erb(:band_detail)
+end

@@ -11,7 +11,19 @@
 <form action="/bands/<%= @band.id() %>/new" method="post">
   <input id="name" name="name" type="text">
 
-  <button type="submit" class="btn btn-success btn-xs">add a venue</button>
+  <button type="submit" class="btn btn-success btn-xs">Add a Venue to <%= @band.name %></button>
+</form>
+<br>
+<form action="/bands/<%= @band.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <input id="name" name="name" type="text">
+
+  <button type="submit" class="btn btn-info btn-xs">Rename <%=@band.name() %></button>
+</form>
+<br>
+<form action='/bands/<%= @band.id() %>/delete' method='post'>
+  <input type="hidden" name='_method' value='delete'>
+  <button type='submit' class="btn btn-warning btn-xs">DELETE <%= @band.name %></button>
 </form>
 
 <br>
