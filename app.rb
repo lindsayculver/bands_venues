@@ -38,3 +38,16 @@ patch('/bands/:id') do
   @band.update({:name => new_name})
   erb(:band_detail)
 end
+
+delete('/bands/:id/delete') do
+  id = params.fetch("id").to_i()
+  @band = Band.find(id)
+  @band.destroy()
+  redirect("/")
+end
+
+get('/venue/:id') do
+  @venue = Venue.find(params.fetch("id").to_i())
+  @bands = Bands.all()
+  erb(:recipe_detail)
+end
