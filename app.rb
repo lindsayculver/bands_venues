@@ -50,3 +50,28 @@ get('/bands/venue/:id') do
   @venue = Venue.find(params.fetch("id").to_i())
   erb(:venue_detail)
 end
+
+get('/venue/:id') do
+  @venue = Venue.find(params.fetch("id").to_i())
+  @bands = Band.all()
+  erb(:venue_detail)
+end
+
+post('/venue/:id/') do
+  venue_name = params.fetch("name")
+  band_id = params.fetch("id").to_i()
+  band = Band.find(band_id)
+  new_band = Band.find_or_create_by({:name => new_ingredient_name})
+
+  if band.venues().find_by({:name => venue_name})
+    # do nothing
+  else
+    band.venues.push(venue_name)
+  end
+
+# is the same thing as:
+  # unless @recipe.ingredients().find_by({:name => new_ingredient_name})
+#   recipe.ingredients.push(new_ingredient)
+# end
+  redirect("/")
+end

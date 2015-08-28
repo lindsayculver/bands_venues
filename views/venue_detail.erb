@@ -1,1 +1,9 @@
-<h1><%= @venue.name %></h1>
+<h1>Bands that perform at <%= @venue.name %></h1>
+
+<ul>
+  <% @venue.bands.each() do |band| %>
+  <li><a href="/venue/<%= band.id() %>"><%= band.name() %></a></li>
+  <% end %>
+</ul>
+
+<a href="/" class="btn btn-info btn-xs">Back to Bands</a>
