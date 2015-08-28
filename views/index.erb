@@ -9,3 +9,11 @@
   <li> <a href="/bands/<%-band.id() %>"><<%= band.name() %></a></li>
   <% end %>
 </ul>
+
+<br>
+
+<form action="/bands" method="post">
+  <input id="name" name="name" type="text">
+  <br>
+  <button type="submit" class="btn btn-success btn-xs">Add a Band</button>
+  </form>
