@@ -58,20 +58,15 @@ get('/venue/:id') do
 end
 
 post('/venue/:id/') do
-  venue_name = params.fetch("name")
-  band_id = params.fetch("id").to_i()
-  band = Band.find(band_id)
-  new_band = Band.find_or_create_by({:name => new_ingredient_name})
+  band_name = params.fetch("name")
+  venue_id = params.fetch("id").to_i()
+  venue = Venue.find(venue_id)
+  new_venue = Venue.find_or_create_by({:name => band_name})
 
-  if band.venues().find_by({:name => venue_name})
+  if band.venues().find_by({:name => band_name})
     # do nothing
   else
-    band.venues.push(venue_name)
+    band.venues.push(band_name)
   end
-
-# is the same thing as:
-  # unless @recipe.ingredients().find_by({:name => new_ingredient_name})
-#   recipe.ingredients.push(new_ingredient)
-# end
   redirect("/")
 end
