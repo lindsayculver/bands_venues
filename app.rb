@@ -1,4 +1,5 @@
 require("bundler/setup")
+require("pry")
 Bundler.require(:default)
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
@@ -19,6 +20,7 @@ end
 
 get('/bands/:id') do
   @band = Band.find(params.fetch("id").to_i())
+  @venues = Venue.all()
   erb(:band_detail)
 end
 
@@ -31,12 +33,27 @@ post('/bands/:id/new') do
   redirect back
 end
 
+
 patch('/bands/:id') do
-  new_name = params.fetch("name")
+  # binding.pry
   id = params.fetch("id").to_i()
   @band = Band.find(id)
-  @band.update({:name => new_name})
-  erb(:band_detail)
+
+  new_name = if params.include?("name")
+    params.fetch("name")
+  else
+    @band.name()
+  end
+  @venues = []
+  if params.include?("checkbox_values")
+    params.fetch("checkbox_values").each() do |venue_id|
+      @venues.push(Venue.find(venue_id.to_i()))
+    end
+  else
+      @venues = @band.venues()
+  end
+  @band.update(:name => new_name, :venues => @venues)
+  redirect back
 end
 
 delete('/bands/:id/delete') do

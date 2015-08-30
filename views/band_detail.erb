@@ -1,17 +1,32 @@
 <h1><%= @band.name %>'s Venues</h1>
 
 <br>
-<ul>
-  <% @band.venues.each() do |venue| %>
-  <li> <a href="/bands/venue/<%= venue.id() %>"><%= venue.name() %></a></li>
+
+<form action="/bands/<%= @band.id() %>" method="post">
+  <input type="hidden" name='_method' value='patch'>
+
+  <% @venues.each() do |venue| %>
+  <input type="checkbox" name="checkbox_values[]" value="<%= venue.id %>"
+  <% if @band.venues.include?(venue) %>
+  checked
   <% end %>
-</ul>
+  >
+
+  <label><%= venue.name() %></label>
+
+  <br>
+
+  <% end %>
+
+    <button type="submit" class="btn btn-success btn-xs">Update Changes</button>
+  </form>
+
 
 <br>
 <form action="/bands/<%= @band.id() %>/new" method="post">
   <input id="name" name="name" type="text">
 
-  <button type="submit" class="btn btn-success btn-xs">Add a Venue to <%= @band.name %></button>
+  <button type="submit" class="btn btn-success btn-xs">Add a Venue</button>
 </form>
 <br>
 <form action="/bands/<%= @band.id() %>" method="post">

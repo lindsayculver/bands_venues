@@ -7,7 +7,7 @@ gem("pg")
 gem("sinatra")
 gem("shoulda-matchers")
 
-group(:test) do
+group(:develoment, :test) do
   gem("rspec")
   gem("capybara")
   gem('pry')
